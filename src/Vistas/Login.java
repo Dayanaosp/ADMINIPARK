@@ -4,8 +4,12 @@
  */
 package Vistas;
 
-import Vistas.empleado; 
-import javax.swing.JOptionPane;
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+import modelo.usuario;
+import controlador.UsuarioController;
+
 
 /**
  *
@@ -13,14 +17,35 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+     private UsuarioController controlador;
+    
     public Login() {
         initComponents();
         this.ocultar.setVisible(false);
+        this.setTitle("ADMINIPARK");
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+        
+        usuario modelo = new usuario();
+        controlador = new UsuarioController(modelo, this);
+    }
+    
+     public javax.swing.JTextField getTxtusuario() {
+        return txtusuario;
     }
 
+    public javax.swing.JPasswordField getTxtContraseña() {
+        return txtcontraseña;
+    }
+
+    public javax.swing.JComboBox<String> getCboRol() {
+        return cborol;
+    }
+    
+    public javax.swing.JButton getBtnIniciar() {
+        return btniniciar;
+    }
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,14 +60,13 @@ public class Login extends javax.swing.JFrame {
         panelRound2 = new Vistas.PanelRound();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cbmrol = new javax.swing.JComboBox<>();
+        cborol = new javax.swing.JComboBox<>();
         txtusuario = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         btniniciar = new javax.swing.JButton();
         ver = new javax.swing.JLabel();
         ocultar = new javax.swing.JLabel();
         txtcontraseña = new javax.swing.JPasswordField();
-        jLabel4 = new javax.swing.JLabel();
+        lblRegistrarse = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -77,17 +101,17 @@ public class Login extends javax.swing.JFrame {
         jLabel2.setText("¡Bienvenido!");
         panelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(157, 223, -1, -1));
 
-        cbmrol.setBackground(new java.awt.Color(255, 255, 255));
-        cbmrol.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
-        cbmrol.setForeground(new java.awt.Color(0, 0, 0));
-        cbmrol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccione un rol--", "Administrador", "Empleado" }));
-        cbmrol.setBorder(null);
-        cbmrol.addActionListener(new java.awt.event.ActionListener() {
+        cborol.setBackground(new java.awt.Color(255, 255, 255));
+        cborol.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
+        cborol.setForeground(new java.awt.Color(0, 0, 0));
+        cborol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Seleccione un rol--", "Administrador", "Empleado" }));
+        cborol.setBorder(null);
+        cborol.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbmrolActionPerformed(evt);
+                cborolActionPerformed(evt);
             }
         });
-        panelRound1.add(cbmrol, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 250, 40));
+        panelRound1.add(cborol, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 250, 40));
 
         txtusuario.setBackground(new java.awt.Color(255, 255, 255));
         txtusuario.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
@@ -95,12 +119,12 @@ public class Login extends javax.swing.JFrame {
         txtusuario.setBorder(null);
         txtusuario.setMaximumSize(new java.awt.Dimension(42, 36));
         txtusuario.setMinimumSize(new java.awt.Dimension(42, 36));
+        txtusuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtusuarioFocusGained(evt);
+            }
+        });
         panelRound1.add(txtusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 230, 20));
-
-        jLabel3.setFont(new java.awt.Font("Nunito", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(215, 125, 91));
-        jLabel3.setText("¿Olvidaste tu contraseña?");
-        panelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, -1, -1));
 
         btniniciar.setBackground(new java.awt.Color(215, 125, 91));
         btniniciar.setFont(new java.awt.Font("Nunito", 1, 24)); // NOI18N
@@ -113,7 +137,7 @@ public class Login extends javax.swing.JFrame {
                 btniniciarActionPerformed(evt);
             }
         });
-        panelRound1.add(btniniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 510, 202, 42));
+        panelRound1.add(btniniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 490, 202, 42));
 
         ver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ver.png"))); // NOI18N
         ver.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -142,10 +166,22 @@ public class Login extends javax.swing.JFrame {
         });
         panelRound1.add(txtcontraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 410, 230, -1));
 
-        jLabel4.setFont(new java.awt.Font("Nunito", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(215, 125, 91));
-        jLabel4.setText("¿Aún no tienes cuenta? Únete aquí");
-        panelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 570, -1, -1));
+        lblRegistrarse.setFont(new java.awt.Font("Nunito", 1, 14)); // NOI18N
+        lblRegistrarse.setForeground(new java.awt.Color(215, 125, 91));
+        lblRegistrarse.setText("¿Aún no tienes cuenta? Únete aquí");
+        lblRegistrarse.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblRegistrarse.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRegistrarseMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblRegistrarseMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblRegistrarseMouseExited(evt);
+            }
+        });
+        panelRound1.add(lblRegistrarse, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 560, -1, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/roles.png"))); // NOI18N
         panelRound1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 50, 40));
@@ -219,9 +255,9 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbmrolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbmrolActionPerformed
+    private void cborolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cborolActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbmrolActionPerformed
+    }//GEN-LAST:event_cborolActionPerformed
 
     private void txtcontraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraseñaActionPerformed
         // TODO add your handling code here:
@@ -240,32 +276,33 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_ocultarMouseClicked
 
     private void btniniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btniniciarActionPerformed
-           
-        String rolSeleccionado = cbmrol.getSelectedItem().toString();
-
-        String usuario = txtusuario.getText().trim();
-        String contraseña = new String(txtcontraseña.getPassword()); 
-
-        if (rolSeleccionado.equals("Administrador")) {
-            if (usuario.equals("admin") && contraseña.equals("123")) {
-                empleado empleadoFrame = new empleado();
-                empleadoFrame.setVisible(true);
-                this.dispose(); 
-            } else {
-                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else if (rolSeleccionado.equals("Empleado")) {
-            if (usuario.equals("empleado123") && contraseña.equals("123")) {
-                empleado empleadoFrame = new empleado();
-                empleadoFrame.setVisible(true);
-                this.dispose(); 
-            } else {
-                JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione un rol válido", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+         controlador.iniciarSesion();              
     }//GEN-LAST:event_btniniciarActionPerformed
+
+    private void lblRegistrarseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistrarseMouseClicked
+        cuentan registroFrame = new cuentan(); 
+        registroFrame.setVisible(true);
+        dispose(); 
+    }//GEN-LAST:event_lblRegistrarseMouseClicked
+
+    private void lblRegistrarseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistrarseMouseEntered
+        
+        Color customColor = Color.decode("#D77D5B");
+        Color darkerColor = customColor.darker();
+        Border lblBorder = BorderFactory.createMatteBorder(0, 0, 1, 0, darkerColor);
+        lblRegistrarse.setBorder(lblBorder);
+        
+    }//GEN-LAST:event_lblRegistrarseMouseEntered
+
+    private void lblRegistrarseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegistrarseMouseExited
+        Color customColor = Color.decode("#D77D5B");
+        Border lblBorder = BorderFactory.createMatteBorder(0, 0, 1, 0, customColor);
+        lblRegistrarse.setBorder(lblBorder);
+    }//GEN-LAST:event_lblRegistrarseMouseExited
+
+    private void txtusuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtusuarioFocusGained
+
+    }//GEN-LAST:event_txtusuarioFocusGained
 
     /**
      * @param args the command line arguments
@@ -304,18 +341,17 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btniniciar;
-    private javax.swing.JComboBox<String> cbmrol;
+    private javax.swing.JComboBox<String> cborol;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lblRegistrarse;
     private javax.swing.JLabel ocultar;
     private Vistas.PanelRound panelRound1;
     private Vistas.PanelRound panelRound2;
@@ -323,4 +359,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField txtusuario;
     private javax.swing.JLabel ver;
     // End of variables declaration//GEN-END:variables
+
 }

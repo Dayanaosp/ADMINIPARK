@@ -4,58 +4,22 @@
  */
 package Vistas;
 
-import javax.swing.table.DefaultTableModel;
-import modelo.Conexion;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-
 /**
  *
  * @author Dayana
  */
-public class empleado extends javax.swing.JFrame {
+public class vehiculos extends javax.swing.JFrame {
 
-     private registroem registroemFrame;
-    
-    public empleado() {
+    /**
+     * Creates new form Login
+     */
+    public vehiculos() {
         initComponents();
-        pcliente.setVisible(false);
+        pempleado.setVisible(false);
         pvehiculo.setVisible(false);
         pfactura.setVisible(false);
-        cargarEmpleados();
-        this.setLocationRelativeTo(null); 
     }
 
-    public DefaultTableModel getTableModel() {
-        return (DefaultTableModel) tblempleados.getModel();
-    }
-    
-        void cargarEmpleados() {
-        DefaultTableModel model = (DefaultTableModel) tblempleados.getModel();
-        PreparedStatement ps;
-        ResultSet rs;
-
-        String query = "SELECT nombreUsuario, rol, estado FROM empleado";
-
-        try {
-            ps = Conexion.getConnection().prepareStatement(query);
-            rs = ps.executeQuery();
-            model.setRowCount(0); // Limpiar la tabla antes de cargar los datos
-
-            while (rs.next()) {
-                String usuario = rs.getString("nombreUsuario");
-                String rol = rs.getString("rol");
-                String estado = rs.getString("estado");
-                model.addRow(new Object[]{usuario, rol, estado});
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(empleado.class.getName()).log(Level.SEVERE, null, ex);
-        }
-}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -69,29 +33,28 @@ public class empleado extends javax.swing.JFrame {
         panelRound1 = new Vistas.PanelRound();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btnagregar = new javax.swing.JButton();
+        btnnuevo = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         btnbuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblempleados = new javax.swing.JTable();
-        btnactualizar = new javax.swing.JButton();
-        btbeditar1 = new javax.swing.JButton();
+        jTable1 = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         pnsalir = new Vistas.PanelRound();
         btnsalir = new javax.swing.JButton();
         pcliente = new Vistas.PanelRound();
         jLabel7 = new javax.swing.JLabel();
-        pempleado = new Vistas.PanelRound();
-        btnempleado1 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         pvehiculo = new Vistas.PanelRound();
         jLabel10 = new javax.swing.JLabel();
+        pempleado = new Vistas.PanelRound();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         pfactura = new Vistas.PanelRound();
         jLabel11 = new javax.swing.JLabel();
         panelRound2 = new Vistas.PanelRound();
         btncliente1 = new javax.swing.JButton();
+        panelRound5 = new Vistas.PanelRound();
+        btnempleado1 = new javax.swing.JButton();
         panelRound3 = new Vistas.PanelRound();
         btnvehiculo = new javax.swing.JButton();
         panelRound4 = new Vistas.PanelRound();
@@ -116,14 +79,14 @@ public class empleado extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(215, 125, 91));
         jLabel2.setText("Empleados registrados");
 
-        btnagregar.setBackground(new java.awt.Color(215, 125, 91));
-        btnagregar.setFont(new java.awt.Font("Nunito", 1, 14)); // NOI18N
-        btnagregar.setForeground(new java.awt.Color(255, 255, 255));
-        btnagregar.setText("Agregar");
-        btnagregar.setBorder(null);
-        btnagregar.addActionListener(new java.awt.event.ActionListener() {
+        btnnuevo.setBackground(new java.awt.Color(215, 125, 91));
+        btnnuevo.setFont(new java.awt.Font("Nunito", 1, 14)); // NOI18N
+        btnnuevo.setForeground(new java.awt.Color(255, 255, 255));
+        btnnuevo.setText("Nuevo empleado");
+        btnnuevo.setBorder(null);
+        btnnuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnagregarActionPerformed(evt);
+                btnnuevoActionPerformed(evt);
             }
         });
 
@@ -139,9 +102,9 @@ public class empleado extends javax.swing.JFrame {
         btnbuscar.setText("Buscar");
         btnbuscar.setBorder(null);
 
-        tblempleados.setBackground(new java.awt.Color(250, 217, 204));
-        tblempleados.setForeground(new java.awt.Color(0, 0, 0));
-        tblempleados.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setBackground(new java.awt.Color(250, 217, 204));
+        jTable1.setForeground(new java.awt.Color(0, 0, 0));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -149,32 +112,10 @@ public class empleado extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Id", "Usuario", "Contraseña", "Rol", "Estado"
+                "Id", "Usuario", "Contraseña", "Rol", "Acciones"
             }
         ));
-        jScrollPane1.setViewportView(tblempleados);
-
-        btnactualizar.setBackground(new java.awt.Color(215, 125, 91));
-        btnactualizar.setFont(new java.awt.Font("Nunito", 1, 14)); // NOI18N
-        btnactualizar.setForeground(new java.awt.Color(255, 255, 255));
-        btnactualizar.setText("Actualizar");
-        btnactualizar.setBorder(null);
-        btnactualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnactualizarActionPerformed(evt);
-            }
-        });
-
-        btbeditar1.setBackground(new java.awt.Color(215, 125, 91));
-        btbeditar1.setFont(new java.awt.Font("Nunito", 1, 14)); // NOI18N
-        btbeditar1.setForeground(new java.awt.Color(255, 255, 255));
-        btbeditar1.setText("Editar");
-        btbeditar1.setBorder(null);
-        btbeditar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btbeditar1ActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout panelRound1Layout = new javax.swing.GroupLayout(panelRound1);
         panelRound1.setLayout(panelRound1Layout);
@@ -197,10 +138,7 @@ public class empleado extends javax.swing.JFrame {
                         .addGap(71, 71, 71)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnagregar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnactualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btbeditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(99, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
@@ -218,12 +156,7 @@ public class empleado extends javax.swing.JFrame {
                 .addGap(54, 54, 54)
                 .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addComponent(btnagregar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(btnactualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(btbeditar1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnnuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(188, 188, 188)
                 .addComponent(jLabel4)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -249,7 +182,6 @@ public class empleado extends javax.swing.JFrame {
         btnsalir.setBackground(new java.awt.Color(215, 125, 91));
         btnsalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono5.png"))); // NOI18N
         btnsalir.setBorder(null);
-        btnsalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnsalirActionPerformed(evt);
@@ -287,31 +219,6 @@ public class empleado extends javax.swing.JFrame {
 
         jPanel1.add(pcliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 130, 60));
 
-        pempleado.setBackground(new java.awt.Color(215, 125, 91));
-        pempleado.setRoundBottomLeft(30);
-        pempleado.setRoundBottomRight(30);
-        pempleado.setRoundTopLeft(30);
-        pempleado.setRoundTopRight(30);
-        pempleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnempleado1.setBackground(new java.awt.Color(215, 125, 91));
-        btnempleado1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono1.png"))); // NOI18N
-        btnempleado1.setBorder(null);
-        btnempleado1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pempleado.add(btnempleado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jLabel8.setFont(new java.awt.Font("Nunito", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("empleados");
-        pempleado.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
-
-        jLabel9.setFont(new java.awt.Font("Nunito", 1, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Gestión de");
-        pempleado.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
-
-        jPanel1.add(pempleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 190, 60));
-
         pvehiculo.setBackground(new java.awt.Color(215, 125, 91));
         pvehiculo.setRoundBottomRight(30);
         pvehiculo.setRoundTopRight(30);
@@ -338,6 +245,23 @@ public class empleado extends javax.swing.JFrame {
         );
 
         jPanel1.add(pvehiculo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 370, 130, 60));
+
+        pempleado.setBackground(new java.awt.Color(215, 125, 91));
+        pempleado.setRoundBottomRight(30);
+        pempleado.setRoundTopRight(30);
+        pempleado.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setFont(new java.awt.Font("Nunito", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Gestión de");
+        pempleado.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Nunito", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("empleados");
+        pempleado.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        jPanel1.add(pempleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 130, 60));
 
         pfactura.setBackground(new java.awt.Color(215, 125, 91));
         pfactura.setRoundBottomRight(30);
@@ -375,7 +299,6 @@ public class empleado extends javax.swing.JFrame {
         btncliente1.setBackground(new java.awt.Color(215, 125, 91));
         btncliente1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono2.png"))); // NOI18N
         btncliente1.setBorder(null);
-        btncliente1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btncliente1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btncliente1MouseEntered(evt);
@@ -409,6 +332,40 @@ public class empleado extends javax.swing.JFrame {
 
         jPanel1.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
+        panelRound5.setBackground(new java.awt.Color(215, 125, 91));
+        panelRound5.setRoundBottomLeft(30);
+        panelRound5.setRoundBottomRight(30);
+        panelRound5.setRoundTopLeft(30);
+        panelRound5.setRoundTopRight(30);
+
+        btnempleado1.setBackground(new java.awt.Color(215, 125, 91));
+        btnempleado1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono1.png"))); // NOI18N
+        btnempleado1.setBorder(null);
+        btnempleado1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnempleado1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelRound5Layout = new javax.swing.GroupLayout(panelRound5);
+        panelRound5.setLayout(panelRound5Layout);
+        panelRound5Layout.setHorizontalGroup(
+            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound5Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(btnempleado1)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+        panelRound5Layout.setVerticalGroup(
+            panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRound5Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(btnempleado1)
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, 60));
+
         panelRound3.setBackground(new java.awt.Color(215, 125, 91));
         panelRound3.setRoundBottomLeft(30);
         panelRound3.setRoundBottomRight(30);
@@ -418,7 +375,6 @@ public class empleado extends javax.swing.JFrame {
         btnvehiculo.setBackground(new java.awt.Color(215, 125, 91));
         btnvehiculo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono3.png"))); // NOI18N
         btnvehiculo.setBorder(null);
-        btnvehiculo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnvehiculo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnvehiculoMouseEntered(evt);
@@ -461,7 +417,6 @@ public class empleado extends javax.swing.JFrame {
         btnfactura.setBackground(new java.awt.Color(215, 125, 91));
         btnfactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icono4.png"))); // NOI18N
         btnfactura.setBorder(null);
-        btnfactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnfactura.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnfacturaMouseEntered(evt);
@@ -511,32 +466,26 @@ public class empleado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnagregarActionPerformed
-        
-        if (registroemFrame == null || !registroemFrame.isVisible()) {
-            registroemFrame = new registroem(); 
-            registroemFrame.setLocationRelativeTo(null); 
-            registroemFrame.setVisible(true); 
-            this.dispose(); 
-        }
-    }//GEN-LAST:event_btnagregarActionPerformed
+    private void btnnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnuevoActionPerformed
+        registroem registroemFrame = new registroem(); 
+        registroemFrame.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnnuevoActionPerformed
 
     private void btnvehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnvehiculoActionPerformed
-        vehiculos vehiculoFrame = new vehiculos(); 
-        vehiculoFrame.setVisible(true); 
-        this.dispose(); 
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnvehiculoActionPerformed
 
     private void btnfacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnfacturaActionPerformed
         facturas facturaFrame = new facturas(); 
-        facturaFrame.setVisible(true); 
-        this.dispose();
+        facturaFrame.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnfacturaActionPerformed
 
     private void btncliente1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncliente1ActionPerformed
         clientes clienteFrame = new clientes(); 
-        clienteFrame.setVisible(true); 
-        this.dispose(); 
+        clienteFrame.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btncliente1ActionPerformed
 
     private void btncliente1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btncliente1MouseEntered
@@ -549,8 +498,8 @@ public class empleado extends javax.swing.JFrame {
 
     private void btnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsalirActionPerformed
         Login loginFrame = new Login(); 
-        loginFrame.setVisible(true); 
-        this.dispose(); 
+        loginFrame.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnsalirActionPerformed
 
     private void btnvehiculoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnvehiculoMouseEntered
@@ -569,13 +518,11 @@ public class empleado extends javax.swing.JFrame {
         pfactura.setVisible(false);
     }//GEN-LAST:event_btnfacturaMouseExited
 
-    private void btnactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactualizarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnactualizarActionPerformed
-
-    private void btbeditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbeditar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btbeditar1ActionPerformed
+    private void btnempleado1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnempleado1ActionPerformed
+        empleado empleadoFrame = new empleado(); 
+        empleadoFrame.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnempleado1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -594,33 +541,45 @@ public class empleado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(empleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(empleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(empleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(empleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(vehiculos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new empleado().setVisible(true);
+                new vehiculos().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btbeditar1;
-    private javax.swing.JButton btnactualizar;
-    private javax.swing.JButton btnagregar;
     private javax.swing.JButton btnbuscar;
     private javax.swing.JButton btncliente1;
     private javax.swing.JButton btnempleado1;
     private javax.swing.JButton btnfactura;
+    private javax.swing.JButton btnnuevo;
     private javax.swing.JButton btnsalir;
     private javax.swing.JButton btnvehiculo;
     private javax.swing.JLabel jLabel1;
@@ -634,16 +593,17 @@ public class empleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField2;
     private Vistas.PanelRound panelRound1;
     private Vistas.PanelRound panelRound2;
     private Vistas.PanelRound panelRound3;
     private Vistas.PanelRound panelRound4;
+    private Vistas.PanelRound panelRound5;
     private Vistas.PanelRound pcliente;
     private Vistas.PanelRound pempleado;
     private Vistas.PanelRound pfactura;
     private Vistas.PanelRound pnsalir;
     private Vistas.PanelRound pvehiculo;
-    private javax.swing.JTable tblempleados;
     // End of variables declaration//GEN-END:variables
 }
