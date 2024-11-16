@@ -5,6 +5,11 @@ import controlador.fFactura;
 import modelo.vFactura;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import javax.swing.JOptionPane;
 
 public class frmFactura extends javax.swing.JFrame {
 
