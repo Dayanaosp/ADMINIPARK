@@ -37,14 +37,12 @@ public class cuentan extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         panelRound1 = new Vistas.PanelRound();
         jLabel2 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         btnRegistar = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
         txtApellido = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
@@ -56,8 +54,6 @@ public class cuentan extends javax.swing.JFrame {
         lblInicio = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo.png"))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -94,10 +90,6 @@ public class cuentan extends javax.swing.JFrame {
                 btnRegistarActionPerformed(evt);
             }
         });
-
-        jLabel9.setFont(new java.awt.Font("Nunito", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(215, 125, 91));
-        jLabel9.setText("¿Ya te registraste? Inicia sesión acá");
 
         txtApellido.setBackground(new java.awt.Color(255, 255, 255));
         txtApellido.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
@@ -144,7 +136,6 @@ public class cuentan extends javax.swing.JFrame {
         txtContraseña.setBackground(new java.awt.Color(255, 255, 255));
         txtContraseña.setFont(new java.awt.Font("Nunito", 0, 14)); // NOI18N
         txtContraseña.setForeground(new java.awt.Color(0, 0, 0));
-        txtContraseña.setText("jPasswordField1");
         txtContraseña.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 193, 177), 2));
 
         jLabel11.setFont(new java.awt.Font("Nunito", 1, 16)); // NOI18N
@@ -191,13 +182,8 @@ public class cuentan extends javax.swing.JFrame {
                 .addComponent(btnRegistar, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(137, 137, 137))
             .addGroup(panelRound1Layout.createSequentialGroup()
-                .addGroup(panelRound1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(122, 122, 122)
-                        .addComponent(jLabel9))
-                    .addGroup(panelRound1Layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(lblInicio)))
+                .addGap(102, 102, 102)
+                .addComponent(lblInicio)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelRound1Layout.setVerticalGroup(
@@ -206,7 +192,7 @@ public class cuentan extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
+                .addComponent(lblInicio)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -229,9 +215,7 @@ public class cuentan extends javax.swing.JFrame {
                 .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnRegistar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblInicio)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jPanel1.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 20, 490, 650));
@@ -420,8 +404,6 @@ public class cuentan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblInicio;
     private Vistas.PanelRound panelRound1;
